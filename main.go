@@ -7,6 +7,7 @@ import (
 	"os"
 	"regexp"
 	"runtime"
+	"sort"
 	"strconv"
 	"strings"
 
@@ -160,12 +161,23 @@ func main() {
 
 	if arg1 == "-l" {
 		// List all names
+
+		// Fetch emoji names and URLs
 		emojis, err := fetchEmojis()
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
 			os.Exit(1)
 		}
+
+		// Collect and sort the names
+		names := make([]string, 0, len(emojis))
 		for name := range emojis {
+			names = append(names, name)
+		}
+		sort.Strings(names)
+
+		// Output the names
+		for _, name := range names {
 			fmt.Println(name)
 		}
 		return

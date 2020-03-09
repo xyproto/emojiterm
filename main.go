@@ -14,6 +14,7 @@ import (
 	"github.com/google/go-github/v29/github"
 	"github.com/lucasb-eyer/go-colorful"
 	"golang.org/x/crypto/ssh/terminal"
+	"golang.org/x/oauth2"
 )
 
 const (
@@ -27,8 +28,27 @@ const (
 // * The keys are names, like "snowman".
 // * The values are URLs to PNG images.
 func fetchEmojis() (map[string]string, error) {
+	if token := os.Getenv("GITHUB_TOKEN"); token != "" {
+		return fetchEmojisUsingToken(token)
+	}
 	client := github.NewClient(nil)
 	m, _, err := client.ListEmojis(context.Background())
+	if err != nil {
+		return nil, err
+	}
+	return m, err
+}
+
+// Fetch a map of all available emojis on GitHub,
+// using the GitHub API and a token.
+func fetchEmojisUsingToken(token string) (map[string]string, error) {
+	ctx := context.Background()
+	ts := oauth2.StaticTokenSource(
+		&oauth2.Token{AccessToken: token},
+	)
+	tc := oauth2.NewClient(ctx, ts)
+	client := github.NewClient(tc)
+	m, _, err := client.ListEmojis(ctx)
 	if err != nil {
 		return nil, err
 	}

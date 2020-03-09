@@ -1,14 +1,18 @@
-# emojiterm [![Build Status](https://travis-ci.com/xyproto/emojiterm.svg?branch=master)](https://travis-ci.com/xyproto/emojiterm) [![Go Report Card](https://goreportcard.com/badge/github.com/xyproto/emojiterm)](https://goreportcard.com/report/github.com/xyproto/emojiterm) [![License](https://img.shields.io/badge/License-MPL2-brightgreen)](https://raw.githubusercontent.com/xyproto/emojiterm/master/LICENSE)
+# EmojiTerm [![Build Status](https://travis-ci.com/xyproto/emojiterm.svg?branch=master)](https://travis-ci.com/xyproto/emojiterm) [![Go Report Card](https://goreportcard.com/badge/github.com/xyproto/emojiterm)](https://goreportcard.com/report/github.com/xyproto/emojiterm) [![License](https://img.shields.io/badge/License-MPL2-brightgreen)](https://raw.githubusercontent.com/xyproto/emojiterm/master/LICENSE)
 
 Want to find a suitable Emoji for use on GitHub, using only a terminal that supports 256 colors? Then this application is for you.
 
+You can list all available emoji names, or search for a keyword and display the emoji directly on the terminal.
+
 ![recording](img/recording.gif)
+
+Uses [pixterm](https://github.com/eliukblau/pixterm), [imaging](https://github.com/disintegration/imaging), [go-colorful](https://github.com/lucasb-eyer/go-colorful) and [go-github](https://github.com/google/go-github) "under the hood".
 
 Developed on Arch Linux, using Go 1.14.
 
 ## Requirements
 
-* Go 1.14, but it might also work on some earlier versions.
+* Go >= 1.10.
 * A terminal emulator that supports 256 colors.
 
 ## Installation
@@ -39,5 +43,5 @@ This one works, but does not look quite right:
 The `display` function in `main.go` is based on code from [pixterm](https://github.com/eliukblau/pixterm), which is licensed under `Mozilla Public License 2.0`.
 
 * License: Mozilla Public License 2.0
-* Version: 1.0.0
+* Version: 0.1.0
 * Author: Alexander F. Rødseth &lt;xyproto@archlinux.org&gt;

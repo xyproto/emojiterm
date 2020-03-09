@@ -2,7 +2,7 @@
 
 Want to find a suitable Emoji for use on GitHub, using only a terminal that supports 256 colors? Then this application is for you.
 
-You can list all available emoji names, or search for a keyword and display the emoji directly on the terminal.
+`emojiterm` can list all available emoji names, or search for a keyword and display the emoji directly on the terminal.
 
 ![recording](img/recording.gif)
 

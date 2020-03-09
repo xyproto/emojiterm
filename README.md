@@ -34,6 +34,10 @@ This one works, but does not look quite right:
 
 * `st`
 
+## Request limit
+
+If you reach the request limit for using the GitHub API, placing a valid token in the `GITHUB_TOKEN` environment variable should solve the issue.
+
 ### General Info
 
 * Developed on Arch Linux, using Go 1.14.

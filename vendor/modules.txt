@@ -3,6 +3,9 @@ github.com/disintegration/imaging
 # github.com/eliukblau/pixterm v1.3.1
 ## explicit
 github.com/eliukblau/pixterm/pkg/ansimage
+# github.com/golang/protobuf v1.3.4
+## explicit
+github.com/golang/protobuf/proto
 # github.com/google/go-github/v29 v29.0.3
 ## explicit
 github.com/google/go-github/v29/github
@@ -31,7 +34,24 @@ golang.org/x/image/tiff/lzw
 golang.org/x/image/vp8
 golang.org/x/image/vp8l
 golang.org/x/image/webp
+# golang.org/x/net v0.0.0-20200301022130-244492dfa37a
+## explicit
+golang.org/x/net/context
+golang.org/x/net/context/ctxhttp
+# golang.org/x/oauth2 v0.0.0-20200107190931-bf48bf16ab8d
+## explicit
+golang.org/x/oauth2
+golang.org/x/oauth2/internal
 # golang.org/x/sys v0.0.0-20200302150141-5c8b2ff67527
 ## explicit
 golang.org/x/sys/unix
 golang.org/x/sys/windows
+# google.golang.org/appengine v1.6.5
+## explicit
+google.golang.org/appengine/internal
+google.golang.org/appengine/internal/base
+google.golang.org/appengine/internal/datastore
+google.golang.org/appengine/internal/log
+google.golang.org/appengine/internal/remote_api
+google.golang.org/appengine/internal/urlfetch
+google.golang.org/appengine/urlfetch

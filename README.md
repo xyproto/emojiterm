@@ -38,12 +38,19 @@ This one works, but does not look quite right:
 
 If you reach the request limit for using the GitHub API, placing a valid token in the `GITHUB_TOKEN` environment variable should solve the issue.
 
+For generating a token, just visit [this page](https://github.com/settings/tokens) and click "Generate new token". None of the boxes with extra access needs to be checked, since `emojiterm` only fetches emoji-related information.
+
+When you have a token, you can display a slideshow of all available GitHub emojis, without reaching the request limit. Here's a command for this purpose:
+
+```bash
+export GITHUB_TOKEN="asdf"; for name in $(emojiterm -l); do emojiterm $name; done
+```
+
 ### General Info
 
 * Developed on Arch Linux, using Go 1.14.
 * Uses [pixterm](https://github.com/eliukblau/pixterm), [imaging](https://github.com/disintegration/imaging), [go-colorful](https://github.com/lucasb-eyer/go-colorful) and [go-github](https://github.com/google/go-github).
 * The `display` function in `main.go` is based on code from [pixterm](https://github.com/eliukblau/pixterm) (which is also licensed under `Mozilla Public License 2.0`).
-
 * License: Mozilla Public License 2.0
 * Version: 0.1.0
 * Author: Alexander F. Rødseth &lt;xyproto@archlinux.org&gt;

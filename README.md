@@ -6,8 +6,6 @@ Want to find a suitable Emoji for use on GitHub, using only a terminal that supp
 
 ![recording](img/recording.gif)
 
-Uses [pixterm](https://github.com/eliukblau/pixterm), [imaging](https://github.com/disintegration/imaging), [go-colorful](https://github.com/lucasb-eyer/go-colorful) and [go-github](https://github.com/google/go-github) "under the hood".
-
 ## Requirements
 
 * Go >= 1.10.
@@ -38,9 +36,9 @@ This one works, but does not look quite right:
 
 ### General Info
 
-Developed on Arch Linux, using Go 1.14.
-
-The `display` function in `main.go` is based on code from [pixterm](https://github.com/eliukblau/pixterm), which is licensed under `Mozilla Public License 2.0`.
+* Developed on Arch Linux, using Go 1.14.
+* Uses [pixterm](https://github.com/eliukblau/pixterm), [imaging](https://github.com/disintegration/imaging), [go-colorful](https://github.com/lucasb-eyer/go-colorful) and [go-github](https://github.com/google/go-github).
+* The `display` function in `main.go` is based on code from [pixterm](https://github.com/eliukblau/pixterm) (which is also licensed under `Mozilla Public License 2.0`).
 
 * License: Mozilla Public License 2.0
 * Version: 0.1.0

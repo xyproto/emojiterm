@@ -82,7 +82,7 @@ func display(url, description string) error {
 
 	mc, err := colorful.Hex(matteColor) // RGB color from Hex format
 	if err != nil {
-		return fmt.Errorf("matte color : %s is not a hex-color: %s", matteColor, err.Error())
+		return fmt.Errorf("matte color : %s is not a hex-color: %s", matteColor, err)
 	}
 
 	// create new ANSImage from url
@@ -126,27 +126,50 @@ func display(url, description string) error {
 	return nil
 }
 
+func usage(arg0 string) {
+	fmt.Println(versionString)
+	fmt.Fprintln(os.Stderr, "Usage: "+arg0+" [-l] [searchword]")
+}
+
 func main() {
 	if len(os.Args) < 2 {
-		fmt.Fprintln(os.Stderr, "Usage: "+os.Args[0]+" [-l] [searchword]")
+		usage(os.Args[0])
 		os.Exit(1)
 	}
-	searchword := os.Args[1]
+	arg1 := os.Args[1]
+
+	if arg1 == "-l" {
+		// List all names
+		emojis, err := fetchEmojis()
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		for name := range emojis {
+			fmt.Println(name)
+		}
+		return
+	} else if arg1 == "--version" {
+		fmt.Println(versionString)
+		return
+	} else if arg1 == "--help" {
+		usage(os.Args[0])
+		return
+	} else if strings.HasPrefix(arg1, "-") {
+		fmt.Fprintln(os.Stderr, "unrecognized flag: "+arg1)
+		os.Exit(1)
+	}
+
+	var (
+		found      bool   // Signals if a matchin emoji is found or not
+		searchword = arg1 // The string to search for
+	)
 
 	emojis, err := fetchEmojis()
 	if err != nil {
-		panic(err)
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(1)
 	}
-
-	if searchword == "-l" {
-		// List all names
-		for name := range emojis {
-			fmt.Println(":" + name + ":")
-		}
-		return
-	}
-
-	found := false
 
 	// Does one of the emoji names start with this string?
 	for name, url := range emojis {
@@ -162,7 +185,7 @@ func main() {
 		for name, url := range emojis {
 			if strings.Contains(name, searchword) {
 				if err := display(url, ":"+name+":"); err != nil {
-					fmt.Fprintln(os.Stderr, err.Error())
+					fmt.Fprintln(os.Stderr, err)
 					os.Exit(1)
 				}
 				found = true

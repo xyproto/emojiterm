@@ -1,4 +1,4 @@
-# EmojiTerm [![Build Status](https://travis-ci.com/xyproto/emojiterm.svg?branch=master)](https://travis-ci.com/xyproto/emojiterm) [![Go Report Card](https://goreportcard.com/badge/github.com/xyproto/emojiterm)](https://goreportcard.com/report/github.com/xyproto/emojiterm) [![License](https://img.shields.io/badge/License-MPL2-brightgreen)](https://raw.githubusercontent.com/xyproto/emojiterm/master/LICENSE)
+# Emojiterm [![Build Status](https://travis-ci.com/xyproto/emojiterm.svg?branch=master)](https://travis-ci.com/xyproto/emojiterm) [![Go Report Card](https://goreportcard.com/badge/github.com/xyproto/emojiterm)](https://goreportcard.com/report/github.com/xyproto/emojiterm) [![License](https://img.shields.io/badge/License-MPL2-brightgreen)](https://raw.githubusercontent.com/xyproto/emojiterm/master/LICENSE)
 
 Want to find a suitable Emoji for use on GitHub, using only a terminal that supports 256 colors? Then this application is for you.
 

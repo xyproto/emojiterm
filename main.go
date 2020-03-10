@@ -140,7 +140,8 @@ func display(url, description string) error {
 
 	fmt.Print("\033[" + linesUp + "A")   // move N lines up
 	fmt.Print("\033[" + colsRight + "C") // move 30 to the right
-	fmt.Print(description)               // print the description
+
+	fmt.Print(description) // print the description
 
 	// restore cursor position
 	fmt.Print("\033[u")
@@ -282,15 +283,43 @@ func main() {
 				os.Exit(1)
 			}
 
-			// Does one of the emoji names contain this string?
+			// Check for exact matches first
 			for name, url := range emojis {
-				if strings.Contains(name, searchword) {
+				if name == searchword {
 					if err := display(url, ":"+name+":"); err != nil {
 						fmt.Fprintln(os.Stderr, err)
 						os.Exit(1)
 					}
 					found = true
 					break
+				}
+			}
+
+			// Then check for words that start with the given search word
+			if !found {
+				for name, url := range emojis {
+					if strings.HasPrefix(name, searchword) {
+						if err := display(url, ":"+name+":"); err != nil {
+							fmt.Fprintln(os.Stderr, err)
+							os.Exit(1)
+						}
+						found = true
+						break
+					}
+				}
+			}
+
+			// Then check for names that contain the given search word
+			if !found {
+				for name, url := range emojis {
+					if strings.Contains(name, searchword) {
+						if err := display(url, ":"+name+":"); err != nil {
+							fmt.Fprintln(os.Stderr, err)
+							os.Exit(1)
+						}
+						found = true
+						break
+					}
 				}
 			}
 

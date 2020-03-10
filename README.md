@@ -44,7 +44,7 @@ For generating a token, just visit [this page](https://github.com/settings/token
 When you have a token, you can display a slideshow of all available GitHub emojis, without reaching the request limit. Here's a command for this purpose:
 
 ```bash
-export GITHUB_TOKEN="asdf"; for name in $(emojiterm -l); do emojiterm $name; done
+GITHUB_TOKEN="asdf" emojiterm -a
 ```
 
 ## Setting up an alias

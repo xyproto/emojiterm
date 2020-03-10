@@ -260,7 +260,7 @@ func main() {
 						url := emojis[name]
 						display(url, ":"+name+":")
 						digits := int(math.Floor(math.Log10(float64(total)) + 1)) // Calculate the number of digits in "total"
-						fmt.Printf("[%"+strconv.Itoa(digits)+"d of %"+strconv.Itoa(digits)+"d] Press Enter...\n", counter, total)
+						fmt.Printf("[%"+strconv.Itoa(digits)+"d of %"+strconv.Itoa(digits)+"d] Press Enter... ", counter, total)
 						counter++
 						fmt.Scanln() // Wait for Enter
 					}

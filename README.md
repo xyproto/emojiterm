@@ -46,7 +46,17 @@ When you have a token, you can display a slideshow of all available GitHub emoji
 export GITHUB_TOKEN="asdf"; for name in $(emojiterm -l); do emojiterm $name; done
 ```
 
-### General Info
+## Setting up an alias
+
+One way of using `emojiterm` is through an alias, that also sets the `GITHUB_TOKEN`, like this:
+
+```bash
+alias et='GITHUB_TOKEN="asdf" emojiterm'
+```
+
+Replace `asdf` with your own token, that can be generated here: [GitHub Tokens](https://github.com/settings/tokens).
+
+## General Info
 
 * Developed on Arch Linux, using Go 1.14.
 * Uses [pixterm](https://github.com/eliukblau/pixterm), [imaging](https://github.com/disintegration/imaging), [go-colorful](https://github.com/lucasb-eyer/go-colorful) and [go-github](https://github.com/google/go-github).

@@ -14,14 +14,16 @@ import (
 	"github.com/eliukblau/pixterm/pkg/ansimage"
 	"github.com/google/go-github/v29/github"
 	"github.com/lucasb-eyer/go-colorful"
+	"github.com/urfave/cli/v2"
+	"github.com/xyproto/textoutput"
 	"golang.org/x/crypto/ssh/terminal"
 	"golang.org/x/oauth2"
 )
 
 const (
-	versionString      = "0.1.0"
-	flagRows      uint = 16 // height
-	flagCols      uint = 32 // width
+	versionString      = "emojiterm 0.2.0"
+	height        uint = 16 // height
+	width         uint = 32 // width
 )
 
 // Fetch a map of all available emojis on GitHub,
@@ -82,11 +84,11 @@ func display(url, description string) error {
 	}
 
 	// use custom terminal size (if applies)
-	if ty--; flagRows != 0 { // no custom rows? subtract 1 for prompt spacing
-		ty = int(flagRows) + 1 // weird, but in this case is necessary to add 1 :O
+	if ty--; height != 0 { // no custom rows? subtract 1 for prompt spacing
+		ty = int(height) + 1 // weird, but in this case is necessary to add 1 :O
 	}
-	if flagCols != 0 {
-		tx = int(flagCols)
+	if width != 0 {
+		tx = int(width)
 	}
 
 	// get scale mode from flag
@@ -129,8 +131,8 @@ func display(url, description string) error {
 		return errors.New("not a terminal")
 	}
 
-	linesUp := strconv.Itoa(int(flagRows)/2 + 2)
-	colsRight := strconv.Itoa(int(flagCols) + 5)
+	linesUp := strconv.Itoa(int(height)/2 + 2)
+	colsRight := strconv.Itoa(int(width) + 5)
 
 	fmt.Println()
 	fmt.Print("\033[s") // save cursor position
@@ -142,94 +144,134 @@ func display(url, description string) error {
 	// restore cursor position
 	fmt.Print("\033[u")
 
-	fmt.Println()
-
 	return nil
 }
 
 func usage(arg0 string) {
 	fmt.Println(versionString)
-	fmt.Fprintln(os.Stderr, "Usage: "+arg0+" [-l] [searchword]")
+	fmt.Fprintln(os.Stderr, "Usage: "+arg0+" [-l] [-a] [searchword]")
 }
 
 func main() {
-	if len(os.Args) < 2 {
-		usage(os.Args[0])
-		os.Exit(1)
-	}
-	arg1 := os.Args[1]
-
-	if arg1 == "-l" {
-		// List all names
-
-		// Fetch emoji names and URLs
-		emojis, err := fetchEmojis()
-		if err != nil {
-			fmt.Fprintln(os.Stderr, err)
-			os.Exit(1)
-		}
-
-		// Collect and sort the names
-		names := make([]string, len(emojis))
-		i := 0
-		for name := range emojis {
-			names[i] = name
-			i++
-		}
-		sort.Strings(names)
-
-		// Output the names
-		for _, name := range names {
-			fmt.Println(name)
-		}
-		return
-	} else if arg1 == "--version" {
-		fmt.Println(versionString)
-		return
-	} else if arg1 == "--help" {
-		usage(os.Args[0])
-		return
-	} else if strings.HasPrefix(arg1, "-") {
-		fmt.Fprintln(os.Stderr, "unrecognized flag: "+arg1)
-		os.Exit(1)
-	}
-
-	var (
-		found      bool   // Signals if a matchin emoji is found or not
-		searchword = arg1 // The string to search for
-	)
-
-	emojis, err := fetchEmojis()
-	if err != nil {
-		fmt.Fprintln(os.Stderr, err)
-		os.Exit(1)
-	}
-
-	// Does one of the emoji names start with this string?
-	for name, url := range emojis {
-		if strings.HasPrefix(name, searchword) {
-			display(url, ":"+name+":")
-			found = true
-			break
-		}
-	}
-
-	// Does one of the emoji names contain this string?
-	if !found {
-		for name, url := range emojis {
-			if strings.Contains(name, searchword) {
-				if err := display(url, ":"+name+":"); err != nil {
-					fmt.Fprintln(os.Stderr, err)
-					os.Exit(1)
-				}
-				found = true
-				break
+	o := textoutput.New()
+	if appErr := (&cli.App{
+		Name:  "emojiterm",
+		Usage: "list and display GitHub emojis directly on the terminal",
+		Flags: []cli.Flag{
+			&cli.BoolFlag{Name: "version", Aliases: []string{"V"}},
+			&cli.BoolFlag{Name: "long", Aliases: []string{"l"}},
+			&cli.BoolFlag{Name: "all", Aliases: []string{"a"}},
+		},
+		Action: func(c *cli.Context) error {
+			if c.Bool("version") {
+				o.Println(versionString)
+				os.Exit(0)
 			}
-		}
-	}
 
-	if !found {
-		fmt.Fprintln(os.Stderr, "Not found: "+searchword)
-		os.Exit(1)
+			// List all emoji names
+			if c.Bool("long") {
+
+				// Fetch emoji names and URLs
+				emojis, err := fetchEmojis()
+				if err != nil {
+					return err
+					//fmt.Fprintln(os.Stderr, err)
+					//os.Exit(1)
+				}
+
+				// Collect and sort the names
+				names := make([]string, len(emojis))
+				i := 0
+				for name := range emojis {
+					names[i] = name
+					i++
+				}
+				sort.Strings(names)
+
+				// Output the names
+				for _, name := range names {
+					fmt.Println(name)
+				}
+				return nil
+			}
+
+			// Display all emojis, with names
+			if c.Bool("all") {
+
+				// Fetch emoji names and URLs
+				emojis, err := fetchEmojis()
+				if err != nil {
+					return err
+					//fmt.Fprintln(os.Stderr, err)
+					//os.Exit(1)
+				}
+
+				// Collect and sort the names
+				names := make([]string, len(emojis))
+				i := 0
+				for name := range emojis {
+					names[i] = name
+					i++
+				}
+				sort.Strings(names)
+
+				// Output all emojis, while waiting for a keypress between each one
+				for _, name := range names {
+					url := emojis[name]
+					display(url, ":"+name+":")
+					fmt.Print("Press Enter... ")
+					fmt.Scanln() // Wait for Enter
+				}
+				return nil
+
+			}
+
+			// Check if any arguments are given
+			if c.NArg() == 0 {
+				usage(os.Args[0])
+				os.Exit(1)
+			}
+
+			searchword := c.Args().Slice()[0]
+			found := false // Signals if a matching emoji is found or not
+
+			emojis, err := fetchEmojis()
+			if err != nil {
+				fmt.Fprintln(os.Stderr, err)
+				os.Exit(1)
+			}
+
+			// Does one of the emoji names start with this string?
+			for name, url := range emojis {
+				if strings.HasPrefix(name, searchword) {
+					display(url, ":"+name+":")
+					found = true
+					break
+				}
+			}
+
+			// Does one of the emoji names contain this string?
+			if !found {
+				for name, url := range emojis {
+					if strings.Contains(name, searchword) {
+						if err := display(url, ":"+name+":"); err != nil {
+							fmt.Fprintln(os.Stderr, err)
+							os.Exit(1)
+						}
+						found = true
+						break
+					}
+				}
+			}
+
+			if !found {
+				fmt.Fprintln(os.Stderr, "Not found: "+searchword)
+				os.Exit(1)
+			}
+
+			return nil // success
+		},
+	}).Run(os.Args); appErr != nil {
+		o.ErrExit(appErr.Error())
 	}
 }

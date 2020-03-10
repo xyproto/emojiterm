@@ -71,5 +71,5 @@ Replace `asdf` with your own token, that can be generated here: [GitHub Tokens](
 * Uses [pixterm](https://github.com/eliukblau/pixterm), [imaging](https://github.com/disintegration/imaging), [go-colorful](https://github.com/lucasb-eyer/go-colorful) and [go-github](https://github.com/google/go-github).
 * The `display` function in `main.go` is based on code from [pixterm](https://github.com/eliukblau/pixterm) (which is also licensed under `Mozilla Public License 2.0`).
 * License: Mozilla Public License 2.0
-* Version: 0.3.0
+* Version: 0.3.1
 * Author: Alexander F. Rødseth &lt;xyproto@archlinux.org&gt;

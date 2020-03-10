@@ -22,7 +22,7 @@ import (
 )
 
 const (
-	versionString      = "emojiterm 0.3.0"
+	versionString      = "emojiterm 0.3.1"
 	height        uint = 16 // height
 	width         uint = 32 // width
 )

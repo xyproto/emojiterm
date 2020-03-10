@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"math"
 	"os"
 	"regexp"
 	"runtime"
@@ -168,6 +169,12 @@ func main() {
 				os.Exit(0)
 			}
 
+			// Check if a searchword is given
+			searchword := ""
+			if c.NArg() != 0 {
+				searchword = c.Args().Slice()[0]
+			}
+
 			// List all emoji names
 			if c.Bool("long") {
 
@@ -175,8 +182,28 @@ func main() {
 				emojis, err := fetchEmojis()
 				if err != nil {
 					return err
-					//fmt.Fprintln(os.Stderr, err)
-					//os.Exit(1)
+				}
+
+				if searchword != "" {
+					// A searchword was supplied
+
+					found := false
+
+					// List the emojis containing this string
+					for name := range emojis {
+						if strings.Contains(name, searchword) {
+							// Highlight the search term
+							o.Println(strings.Replace(name, searchword, "<red>"+searchword+"</red>", -1))
+							found = true
+						}
+					}
+
+					if !found {
+						fmt.Fprintln(os.Stderr, "Not found: "+searchword)
+						os.Exit(1)
+					}
+
+					return nil // success
 				}
 
 				// Collect and sort the names
@@ -192,7 +219,7 @@ func main() {
 				for _, name := range names {
 					fmt.Println(name)
 				}
-				return nil
+				return nil // success
 			}
 
 			// Display all emojis, with names
@@ -202,8 +229,6 @@ func main() {
 				emojis, err := fetchEmojis()
 				if err != nil {
 					return err
-					//fmt.Fprintln(os.Stderr, err)
-					//os.Exit(1)
 				}
 
 				// Collect and sort the names
@@ -215,24 +240,40 @@ func main() {
 				}
 				sort.Strings(names)
 
+				// Count all matching emojis
+				total := 0
+				if searchword != "" {
+					for _, name := range names {
+						if strings.Contains(name, searchword) {
+							total++
+						}
+					}
+				} else {
+					total = len(names)
+				}
+
 				// Output all emojis, while waiting for a keypress between each one
+				counter := 1
 				for _, name := range names {
-					url := emojis[name]
-					display(url, ":"+name+":")
-					fmt.Print("Press Enter... ")
-					fmt.Scanln() // Wait for Enter
+					if searchword == "" || strings.Contains(name, searchword) {
+						url := emojis[name]
+						display(url, ":"+name+":")
+						digits := int(math.Floor(math.Log10(float64(total)) + 1)) // Calculate the number of digits in "total"
+						fmt.Printf("[%"+strconv.Itoa(digits)+"d of %"+strconv.Itoa(digits)+"d] Press Enter...\n", counter, total)
+						counter++
+						fmt.Scanln() // Wait for Enter
+					}
 				}
 				return nil
 
 			}
 
-			// Check if any arguments are given
-			if c.NArg() == 0 {
+			// We're not listing emojis, but searching for one. Check if a searchword is given.
+			if searchword == "" {
 				usage(os.Args[0])
 				os.Exit(1)
 			}
 
-			searchword := c.Args().Slice()[0]
 			found := false // Signals if a matching emoji is found or not
 
 			emojis, err := fetchEmojis()
@@ -241,26 +282,15 @@ func main() {
 				os.Exit(1)
 			}
 
-			// Does one of the emoji names start with this string?
+			// Does one of the emoji names contain this string?
 			for name, url := range emojis {
-				if strings.HasPrefix(name, searchword) {
-					display(url, ":"+name+":")
+				if strings.Contains(name, searchword) {
+					if err := display(url, ":"+name+":"); err != nil {
+						fmt.Fprintln(os.Stderr, err)
+						os.Exit(1)
+					}
 					found = true
 					break
-				}
-			}
-
-			// Does one of the emoji names contain this string?
-			if !found {
-				for name, url := range emojis {
-					if strings.Contains(name, searchword) {
-						if err := display(url, ":"+name+":"); err != nil {
-							fmt.Fprintln(os.Stderr, err)
-							os.Exit(1)
-						}
-						found = true
-						break
-					}
 				}
 			}
 

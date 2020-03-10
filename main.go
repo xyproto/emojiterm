@@ -170,9 +170,11 @@ func main() {
 		}
 
 		// Collect and sort the names
-		names := make([]string, 0, len(emojis))
+		names := make([]string, len(emojis))
+		i := 0
 		for name := range emojis {
-			names = append(names, name)
+			names[i] = name
+			i++
 		}
 		sort.Strings(names)
 

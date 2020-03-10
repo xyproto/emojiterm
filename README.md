@@ -41,10 +41,18 @@ If you reach the request limit for using the GitHub API, placing a valid token i
 
 For generating a token, just visit [this page](https://github.com/settings/tokens) and click "Generate new token". None of the boxes with extra access needs to be checked, since `emojiterm` only fetches emoji-related information.
 
-When you have a token, you can display a slideshow of all available GitHub emojis, without reaching the request limit. Here's a command for this purpose:
+## Slideshow
+
+You can display a slideshow of all available GitHub emojis with the following command:
 
 ```bash
 GITHUB_TOKEN="asdf" emojiterm -a
+```
+
+This can also take an optional search term:
+
+```bash
+GITHUB_TOKEN="asdf" emojiterm -a cat
 ```
 
 ## Setting up an alias

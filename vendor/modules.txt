@@ -1,39 +1,57 @@
-# github.com/cpuguy83/go-md2man/v2 v2.0.0
-## explicit
+# github.com/cpuguy83/go-md2man/v2 v2.0.2
+## explicit; go 1.11
 github.com/cpuguy83/go-md2man/v2/md2man
 # github.com/disintegration/imaging v1.6.2
+## explicit
 github.com/disintegration/imaging
 # github.com/eliukblau/pixterm v1.3.1
-## explicit
+## explicit; go 1.13
 github.com/eliukblau/pixterm/pkg/ansimage
-# github.com/golang/protobuf v1.3.4
-## explicit
+# github.com/golang/protobuf v1.5.2
+## explicit; go 1.9
 github.com/golang/protobuf/proto
 # github.com/google/go-github/v29 v29.0.3
-## explicit
+## explicit; go 1.13
 github.com/google/go-github/v29/github
-# github.com/google/go-querystring v1.0.0
+# github.com/google/go-querystring v1.1.0
+## explicit; go 1.10
 github.com/google/go-querystring/query
-# github.com/lucasb-eyer/go-colorful v1.0.3
-## explicit
+# github.com/lucasb-eyer/go-colorful v1.2.0
+## explicit; go 1.12
 github.com/lucasb-eyer/go-colorful
-# github.com/pkg/term v0.0.0-20190109203006-aa71e9d9e942
+# github.com/mattn/go-colorable v0.1.13
+## explicit; go 1.15
+github.com/mattn/go-colorable
+# github.com/mattn/go-isatty v0.0.16
+## explicit; go 1.15
+github.com/mattn/go-isatty
+# github.com/mgutz/ansi v0.0.0-20200706080929-d51e80ef957d
+## explicit
+github.com/mgutz/ansi
+# github.com/pkg/term v1.2.0-beta.2.0.20210419004637-f749b98bd0ba
+## explicit; go 1.14
 github.com/pkg/term
 github.com/pkg/term/termios
-# github.com/russross/blackfriday/v2 v2.0.1
+# github.com/russross/blackfriday/v2 v2.1.0
+## explicit
 github.com/russross/blackfriday/v2
-# github.com/shurcooL/sanitized_anchor_name v1.0.0
-github.com/shurcooL/sanitized_anchor_name
-# github.com/urfave/cli/v2 v2.1.1
-## explicit
+# github.com/urfave/cli/v2 v2.16.3
+## explicit; go 1.18
 github.com/urfave/cli/v2
-# github.com/xyproto/textoutput v1.11.0
+# github.com/xrash/smetrics v0.0.0-20201216005158-039620a65673
 ## explicit
+github.com/xrash/smetrics
+# github.com/xyproto/env v1.7.0
+## explicit; go 1.15
+github.com/xyproto/env
+# github.com/xyproto/textoutput v1.14.1
+## explicit; go 1.10
 github.com/xyproto/textoutput
-# github.com/xyproto/vt100 v1.8.3
+# github.com/xyproto/vt100 v1.11.3
+## explicit; go 1.10
 github.com/xyproto/vt100
-# golang.org/x/crypto v0.0.0-20200302210943-78000ba7a073
-## explicit
+# golang.org/x/crypto v0.0.0-20220829220503-c86fa9a7ed90
+## explicit; go 1.17
 golang.org/x/crypto/cast5
 golang.org/x/crypto/openpgp
 golang.org/x/crypto/openpgp/armor
@@ -42,8 +60,8 @@ golang.org/x/crypto/openpgp/errors
 golang.org/x/crypto/openpgp/packet
 golang.org/x/crypto/openpgp/s2k
 golang.org/x/crypto/ssh/terminal
-# golang.org/x/image v0.0.0-20200119044424-58c23975cae1
-## explicit
+# golang.org/x/image v0.0.0-20220902085622-e7cb96979f69
+## explicit; go 1.12
 golang.org/x/image/bmp
 golang.org/x/image/ccitt
 golang.org/x/image/riff
@@ -52,20 +70,25 @@ golang.org/x/image/tiff/lzw
 golang.org/x/image/vp8
 golang.org/x/image/vp8l
 golang.org/x/image/webp
-# golang.org/x/net v0.0.0-20200301022130-244492dfa37a
-## explicit
+# golang.org/x/net v0.0.0-20220909164309-bea034e7d591
+## explicit; go 1.17
 golang.org/x/net/context
 golang.org/x/net/context/ctxhttp
-# golang.org/x/oauth2 v0.0.0-20200107190931-bf48bf16ab8d
-## explicit
+# golang.org/x/oauth2 v0.0.0-20220909003341-f21342109be1
+## explicit; go 1.17
 golang.org/x/oauth2
 golang.org/x/oauth2/internal
-# golang.org/x/sys v0.0.0-20200302150141-5c8b2ff67527
-## explicit
+# golang.org/x/sys v0.0.0-20220909162455-aba9fc2a8ff2
+## explicit; go 1.17
+golang.org/x/sys/internal/unsafeheader
+golang.org/x/sys/plan9
 golang.org/x/sys/unix
 golang.org/x/sys/windows
-# google.golang.org/appengine v1.6.5
-## explicit
+# golang.org/x/term v0.0.0-20220722155259-a9ba230a4035
+## explicit; go 1.17
+golang.org/x/term
+# google.golang.org/appengine v1.6.7
+## explicit; go 1.11
 google.golang.org/appengine/internal
 google.golang.org/appengine/internal/base
 google.golang.org/appengine/internal/datastore
@@ -73,3 +96,32 @@ google.golang.org/appengine/internal/log
 google.golang.org/appengine/internal/remote_api
 google.golang.org/appengine/internal/urlfetch
 google.golang.org/appengine/urlfetch
+# google.golang.org/protobuf v1.28.1
+## explicit; go 1.11
+google.golang.org/protobuf/encoding/prototext
+google.golang.org/protobuf/encoding/protowire
+google.golang.org/protobuf/internal/descfmt
+google.golang.org/protobuf/internal/descopts
+google.golang.org/protobuf/internal/detrand
+google.golang.org/protobuf/internal/encoding/defval
+google.golang.org/protobuf/internal/encoding/messageset
+google.golang.org/protobuf/internal/encoding/tag
+google.golang.org/protobuf/internal/encoding/text
+google.golang.org/protobuf/internal/errors
+google.golang.org/protobuf/internal/filedesc
+google.golang.org/protobuf/internal/filetype
+google.golang.org/protobuf/internal/flags
+google.golang.org/protobuf/internal/genid
+google.golang.org/protobuf/internal/impl
+google.golang.org/protobuf/internal/order
+google.golang.org/protobuf/internal/pragma
+google.golang.org/protobuf/internal/set
+google.golang.org/protobuf/internal/strs
+google.golang.org/protobuf/internal/version
+google.golang.org/protobuf/proto
+google.golang.org/protobuf/reflect/protodesc
+google.golang.org/protobuf/reflect/protoreflect
+google.golang.org/protobuf/reflect/protoregistry
+google.golang.org/protobuf/runtime/protoiface
+google.golang.org/protobuf/runtime/protoimpl
+google.golang.org/protobuf/types/descriptorpb

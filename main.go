@@ -17,12 +17,12 @@ import (
 	"github.com/lucasb-eyer/go-colorful"
 	"github.com/urfave/cli/v2"
 	"github.com/xyproto/textoutput"
-	"golang.org/x/crypto/ssh/terminal"
+	"golang.org/x/term"
 	"golang.org/x/oauth2"
 )
 
 const (
-	versionString      = "emojiterm 0.3.1"
+	versionString      = "emojiterm 0.3.2"
 	height        uint = 16 // height
 	width         uint = 32 // width
 )
@@ -71,14 +71,14 @@ func display(url, description string) error {
 	var (
 		pix        *ansimage.ANSImage
 		err        error
-		isTerminal = terminal.IsTerminal(int(os.Stdout.Fd()))
+		isTerminal = term.IsTerminal(int(os.Stdout.Fd()))
 		tx         = 80
 		ty         = 24
 	)
 
 	// get terminal size
 	if isTerminal {
-		tx, ty, err = terminal.GetSize(int(os.Stdout.Fd()))
+		tx, ty, err = term.GetSize(int(os.Stdout.Fd()))
 		if err != nil {
 			return err
 		}

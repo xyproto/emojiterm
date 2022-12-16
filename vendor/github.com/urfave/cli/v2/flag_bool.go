@@ -84,7 +84,7 @@ func (f *BoolFlag) GetDefaultText() string {
 	if f.DefaultText != "" {
 		return f.DefaultText
 	}
-	return fmt.Sprintf("%v", f.Value)
+	return fmt.Sprintf("%v", f.defaultValue)
 }
 
 // GetEnvVars returns the env vars for this flag
@@ -92,8 +92,20 @@ func (f *BoolFlag) GetEnvVars() []string {
 	return f.EnvVars
 }
 
+// RunAction executes flag action if set
+func (f *BoolFlag) RunAction(c *Context) error {
+	if f.Action != nil {
+		return f.Action(c, c.Bool(f.Name))
+	}
+
+	return nil
+}
+
 // Apply populates the flag given the flag set and environment
 func (f *BoolFlag) Apply(set *flag.FlagSet) error {
+	// set default value so that environment wont be able to overwrite it
+	f.defaultValue = f.Value
+
 	if val, source, found := flagFromEnvOrFile(f.EnvVars, f.FilePath); found {
 		if val != "" {
 			valBool, err := strconv.ParseBool(val)

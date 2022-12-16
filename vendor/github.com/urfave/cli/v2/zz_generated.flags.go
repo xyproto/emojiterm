@@ -22,6 +22,10 @@ type Float64SliceFlag struct {
 
 	Aliases []string
 	EnvVars []string
+
+	defaultValue *Float64Slice
+
+	Action func(*Context, []float64) error
 }
 
 // IsSet returns whether or not the flag has been set through env or file
@@ -63,7 +67,11 @@ type GenericFlag struct {
 	Aliases []string
 	EnvVars []string
 
+	defaultValue Generic
+
 	TakesFile bool
+
+	Action func(*Context, interface{}) error
 }
 
 // String returns a readable representation of this value (for usage defaults)
@@ -109,6 +117,10 @@ type Int64SliceFlag struct {
 
 	Aliases []string
 	EnvVars []string
+
+	defaultValue *Int64Slice
+
+	Action func(*Context, []int64) error
 }
 
 // IsSet returns whether or not the flag has been set through env or file
@@ -149,6 +161,10 @@ type IntSliceFlag struct {
 
 	Aliases []string
 	EnvVars []string
+
+	defaultValue *IntSlice
+
+	Action func(*Context, []int) error
 }
 
 // IsSet returns whether or not the flag has been set through env or file
@@ -190,7 +206,11 @@ type PathFlag struct {
 	Aliases []string
 	EnvVars []string
 
+	defaultValue Path
+
 	TakesFile bool
+
+	Action func(*Context, Path) error
 }
 
 // String returns a readable representation of this value (for usage defaults)
@@ -237,7 +257,11 @@ type StringSliceFlag struct {
 	Aliases []string
 	EnvVars []string
 
+	defaultValue *StringSlice
+
 	TakesFile bool
+
+	Action func(*Context, []string) error
 }
 
 // IsSet returns whether or not the flag has been set through env or file
@@ -279,9 +303,13 @@ type TimestampFlag struct {
 	Aliases []string
 	EnvVars []string
 
+	defaultValue *Timestamp
+
 	Layout string
 
 	Timezone *time.Location
+
+	Action func(*Context, *time.Time) error
 }
 
 // String returns a readable representation of this value (for usage defaults)
@@ -327,6 +355,10 @@ type Uint64SliceFlag struct {
 
 	Aliases []string
 	EnvVars []string
+
+	defaultValue *Uint64Slice
+
+	Action func(*Context, []uint64) error
 }
 
 // IsSet returns whether or not the flag has been set through env or file
@@ -367,6 +399,10 @@ type UintSliceFlag struct {
 
 	Aliases []string
 	EnvVars []string
+
+	defaultValue *UintSlice
+
+	Action func(*Context, []uint) error
 }
 
 // IsSet returns whether or not the flag has been set through env or file
@@ -408,7 +444,11 @@ type BoolFlag struct {
 	Aliases []string
 	EnvVars []string
 
+	defaultValue bool
+
 	Count *int
+
+	Action func(*Context, bool) error
 }
 
 // String returns a readable representation of this value (for usage defaults)
@@ -454,6 +494,10 @@ type Float64Flag struct {
 
 	Aliases []string
 	EnvVars []string
+
+	defaultValue float64
+
+	Action func(*Context, float64) error
 }
 
 // String returns a readable representation of this value (for usage defaults)
@@ -500,7 +544,11 @@ type IntFlag struct {
 	Aliases []string
 	EnvVars []string
 
+	defaultValue int
+
 	Base int
+
+	Action func(*Context, int) error
 }
 
 // String returns a readable representation of this value (for usage defaults)
@@ -547,7 +595,11 @@ type Int64Flag struct {
 	Aliases []string
 	EnvVars []string
 
+	defaultValue int64
+
 	Base int
+
+	Action func(*Context, int64) error
 }
 
 // String returns a readable representation of this value (for usage defaults)
@@ -594,7 +646,11 @@ type StringFlag struct {
 	Aliases []string
 	EnvVars []string
 
+	defaultValue string
+
 	TakesFile bool
+
+	Action func(*Context, string) error
 }
 
 // String returns a readable representation of this value (for usage defaults)
@@ -640,6 +696,10 @@ type DurationFlag struct {
 
 	Aliases []string
 	EnvVars []string
+
+	defaultValue time.Duration
+
+	Action func(*Context, time.Duration) error
 }
 
 // String returns a readable representation of this value (for usage defaults)
@@ -686,7 +746,11 @@ type UintFlag struct {
 	Aliases []string
 	EnvVars []string
 
+	defaultValue uint
+
 	Base int
+
+	Action func(*Context, uint) error
 }
 
 // String returns a readable representation of this value (for usage defaults)
@@ -733,7 +797,11 @@ type Uint64Flag struct {
 	Aliases []string
 	EnvVars []string
 
+	defaultValue uint64
+
 	Base int
+
+	Action func(*Context, uint64) error
 }
 
 // String returns a readable representation of this value (for usage defaults)

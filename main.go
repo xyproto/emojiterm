@@ -17,8 +17,8 @@ import (
 	"github.com/lucasb-eyer/go-colorful"
 	"github.com/urfave/cli/v2"
 	"github.com/xyproto/textoutput"
-	"golang.org/x/term"
 	"golang.org/x/oauth2"
+	"golang.org/x/term"
 )
 
 const (
